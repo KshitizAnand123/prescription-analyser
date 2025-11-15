@@ -7,8 +7,6 @@ uploads/
 # __pycache__ folders
 __pycache__/
 
-# Model files (optional if you want)
-*.joblib
 
 # IDE files
 .vscode/

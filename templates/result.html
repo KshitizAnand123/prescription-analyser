@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Successful</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="alert alert-success text-center">
+            <h4 class="alert-heading">Upload Complete ✅</h4>
+            <p>Your file <strong>{{ filename }}</strong> has been uploaded successfully.</p>
+        </div>
+
+        {% if extracted_text %}
+        <div class="card mt-4">
+            <div class="card-header text-white bg-secondary">Extracted Text</div>
+            <div class="card-body">
+                <pre style="white-space: pre-wrap;">{{ extracted_text }}</pre>
+            </div>
+        </div>
+        {% endif %}
+        
+
+        <div class="alert alert-info mt-4">
+            <h5>Recommended Advice:</h5>
+            <p>{{ advice }}</p>
+        </div>
+
+        <div class="card mt-3">
+        <div class="card-header bg-primary text-white">AI Classification</div>
+        <div class="card-body">
+            {% if not model_loaded %}
+            <p class="text-muted"><em>Text classifier not available (model files missing).</em></p>
+            {% else %}
+            {% if predicted_category %}
+                <p><strong>Predicted category:</strong> {{ predicted_category }} &nbsp;
+                <small>(confidence: {{ '%.0f' % (predicted_confidence*100) }}%)</small></p>
+            {% else %}
+            {% if predicted_category is not none %}
+                <p><strong>Predicted category (low confidence):</strong> {{ predicted_category }} &nbsp;
+                <small>(confidence: {{ '%.0f' % (predicted_confidence*100) }}%)</small></p>
+                <p class="text-muted"><em>Prediction low-confidence — rely on numeric analyzers or upload a clearer scan.</em></p>
+            {% else %}
+                <p class="text-muted"><em>Classifier returned low confidence for this document — relying on numeric analyzers. Try uploading a clearer scan or retrain the model.</em></p>
+            {% endif %}
+   
+
+            {% endif %}
+            {% endif %}
+        </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="/" class="btn btn-primary">Upload Another</a>
+        </div>
+    </div>
+</body>
+</html>

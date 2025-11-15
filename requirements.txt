@@ -1,0 +1,12 @@
+Flask
+pdfplumber
+pdf2image
+pytesseract
+opencv-python
+numpy
+pandas
+pydub
+SpeechRecognition
+joblib
+scikit-learn
+word2number
